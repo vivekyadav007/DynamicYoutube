@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dynamic Youtube Videos</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="video-block">
+        <iframe id="video1" width="560" height="315" src="https://www.youtube.com/embed/_NrSWLQsDL4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p><a href="javascript:;" id="playvideo">Play video</a></p>
+    </div>
+
+    <script>
+        //use .one to ensure this only happens once
+        $(document).ready(function(){
+            //as noted in addendum, check for querystring exitence
+            var symbol = $("#video1")[0].src.indexOf("?") > -1 ? "&" : "?";
+
+            //modify source to autoplay and start video
+            $("#video1")[0].src += symbol + "autoplay=1";
+        })
+    </script>
+</body>
+</html>
