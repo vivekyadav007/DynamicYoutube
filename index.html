@@ -8,20 +8,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="video-block">
-        <iframe id="video1" width="560" height="315" src="https://www.youtube.com/embed/_NrSWLQsDL4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p><a href="javascript:;" id="playvideo">Play video</a></p>
-    </div>
+    <div id="video-block" class="video-block"></div>
 
     <script>
-        //use .one to ensure this only happens once
-        $(document).ready(function(){
-            //as noted in addendum, check for querystring exitence
-            var symbol = $("#video1")[0].src.indexOf("?") > -1 ? "&" : "?";
+        window.addEventListener('load', playVideo());
 
-            //modify source to autoplay and start video
-            $("#video1")[0].src += symbol + "autoplay=1";
-        })
+        function playVideo(){
+            youtubeURL = [
+                'https://www.youtube.com/embed/_NrSWLQsDL4?autoplay=1',
+                'https://www.youtube.com/embed/deyxI-6C2u4?autoplay=1',
+            ]
+            // to get url path
+            var urlParams = new URLSearchParams(window.location.search);
+            // to get the value of url params i.e. video
+            var videoParam = urlParams.get('video');
+            if(videoParam){
+                var videoBlock = document.getElementById('video-block');
+                videoBlock.innerHTML = '<iframe id="video1" width="560" height="315" src="' + youtubeURL[videoParam] + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            }
+        }
     </script>
 </body>
 </html>
